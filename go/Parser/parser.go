@@ -1,4 +1,4 @@
-package Parser // название пакета должно совпадать с именем папки
+package Parser
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 )
 
 func Parse(resp *http.Response) {
-	defer resp.Body.Close() // Закрываем тело ответа после обработки
+	defer resp.Body.Close()
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {

@@ -1,4 +1,4 @@
-package Request_HTTP // название пакета должно совпадать с именем папки
+package Request_HTTP
 
 import (
 	"log"
@@ -21,5 +21,5 @@ func Request() *http.Response {
 	if resp.StatusCode != 200 {
 		log.Fatalf("Ошибка при запросе страницы: %d %s", resp.StatusCode, resp.Status)
 	}
-	return resp // Верните ответ
+	return resp
 }
