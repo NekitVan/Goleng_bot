@@ -1,0 +1,8 @@
+{
+    "tu_day": {
+        "name": ".hdr_bold_huge",
+        "temperature": ".p-forecast__temperature-value",
+        "update": ".p-forecast__title"
+    }
+        
+}
