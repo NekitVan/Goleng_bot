@@ -2,18 +2,20 @@ package Parser
 
 import (
 	"encoding/json"
-	"fmt"
+
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/pterm/pterm"
 )
 
 type WeatherSelectors struct {
 	Name        string `json:"name"`
 	Temperature string `json:"temperature"`
 	Update      string `json:"update"`
+	Uf_index    string `json:"uf_index"`
 }
 type WeatherData struct {
 	Tu_day WeatherSelectors `json:"tu_day"`
@@ -46,23 +48,19 @@ func Parse(resp *http.Response) {
 	}
 
 	cityElem := doc.Find(weatherData.Tu_day.Name)
-	if cityElem.Length() > 0 {
-		fmt.Printf("%s\n", cityElem.Text())
-	} else {
-		fmt.Println("Не удалось найти название района.")
-	}
 
 	temperatureElem := doc.Find(weatherData.Tu_day.Temperature)
-	if temperatureElem.Length() > 0 {
-		fmt.Printf("Температура: %s \n", temperatureElem.Text())
-	} else {
-		fmt.Println("Не удалось найти температуру.")
-	}
 
 	lastUpdateElem := doc.Find(weatherData.Tu_day.Update)
-	if lastUpdateElem.Length() > 0 {
-		fmt.Printf("Последнее обновление: %s\n", lastUpdateElem.Text())
-	} else {
-		fmt.Println("Не удалось найти время обновления.")
-	}
+
+	uf_index_city := doc.Find(weatherData.Tu_day.Uf_index)
+
+	text := pterm.LightRed(cityElem.Text())
+	box1 := pterm.DefaultBox.Sprint(temperatureElem.Text())
+	box2 := pterm.DefaultBox.Sprint(lastUpdateElem.Text())
+	box3 := pterm.DefaultBox.Sprint(uf_index_city.Text())
+	panels, _ := pterm.DefaultPanel.WithPanels(pterm.Panels{
+		{{Data: box1}, {Data: box2}, {Data: box3}},
+	}).Srender()
+	pterm.DefaultBox.WithTitle(text).WithLeftPadding(4).WithRightPadding(4).WithBottomPadding(4).Println(panels)
 }

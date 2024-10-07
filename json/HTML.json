@@ -2,6 +2,10 @@
     "tu_day": {
         "name": ".hdr_bold_huge",
         "temperature": ".p-forecast__temperature-value",
+        "Pressure": ".p-forecast__data",
+        "wind_speed":   ".p-forecast__data",
+        "humidity":     ".icon_weather",
+        "uf_index": ".p-forecast__icon_uv",
         "update": ".p-forecast__title"
     }
         
