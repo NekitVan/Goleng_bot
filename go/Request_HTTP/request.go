@@ -1,11 +1,13 @@
 package Request_HTTP
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
 
-func Request() *http.Response {
+// Request делает HTTP запрос и возвращает ответ и ошибку
+func Request() (*http.Response, error) {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", "https://pogoda.mail.ru/prognoz/magnitogorsk/24hours/", nil)
 	if err != nil {
@@ -16,10 +18,13 @@ func Request() *http.Response {
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
+		return nil, err // Возвращаем ошибку
 	}
 
 	if resp.StatusCode != 200 {
 		log.Fatalf("Ошибка при запросе страницы: %d %s", resp.StatusCode, resp.Status)
+		return nil, fmt.Errorf("ошибка: статус %d %s", resp.StatusCode, resp.Status) // Возвращаем ошибку
 	}
-	return resp
+
+	return resp, nil // Возвращаем ответ и nil как ошибку
 }
