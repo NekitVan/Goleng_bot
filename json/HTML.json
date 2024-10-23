@@ -1,12 +1,11 @@
 {
     "tu_day": {
-        "name": ".hdr_bold_huge",
+        "name": "h1.hdr__inner",
         "temperature": ".p-forecast__temperature-value",
-        "Pressure": ".p-forecast__data",
-        "wind_speed":   ".p-forecast__data",
-        "humidity":     ".icon_weather",
-        "uf_index": ".p-forecast__icon_uv",
+        "pressure": "span:contains('Давление') + span.p-forecast__data",
+        "wind_speed": "span:contains('Скорость ветра') + span.p-forecast__data",
+        "humidity": "span:contains('Влажность') + span.p-forecast__data",
+        "uf_index": "span:contains('Индекс УФ') + span.p-forecast__data",
         "update": ".p-forecast__title"
     }
-        
 }
