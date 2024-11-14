@@ -1,4 +1,4 @@
-package Request_HTTP
+package webclient
 
 import (
 	"fmt"
@@ -6,14 +6,20 @@ import (
 	"net/http"
 )
 
+var (
+	request_url  = "https://pogoda.mail.ru/prognoz/magnitogorsk/24hours/"
+	request_type = "GET"
+	user_agent   = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36"
+)
+
 // Request делает HTTP запрос и возвращает ответ и ошибку
 func Request() (*http.Response, error) {
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", "https://pogoda.mail.ru/prognoz/magnitogorsk/24hours/", nil)
+	req, err := http.NewRequest(request_type, request_url, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36")
+	req.Header.Set("User-Agent", user_agent)
 
 	resp, err := client.Do(req)
 	if err != nil {

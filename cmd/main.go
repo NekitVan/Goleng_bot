@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Goleng_bot/go/Parser"
-	"Goleng_bot/go/Request_HTTP"
+	"Goleng_bot/internal/parser"
+	"Goleng_bot/internal/webclient"
 	"time"
 
 	"github.com/pterm/pterm"
@@ -21,13 +21,13 @@ func main() {
 		time.Sleep(2 * time.Second)
 
 		// Выполняем HTTP запрос
-		resp, err := Request_HTTP.Request()
+		resp, err := webclient.Request()
 		if err != nil {
 			pterm.Error.Println("Ошибка при выполнении запроса:", err)
 			return
 		}
 
-		Parser.Parse(resp)
+		parser.Parse(resp)
 
 		resultChannel <- "Парсинг завершён!"
 	}()
