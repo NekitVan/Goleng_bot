@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Goleng_bot/internal/parser"
-	"Goleng_bot/internal/webclient"
 	"time"
+	"weather-app/internal/parser"
+	"weather-app/internal/webclient"
 
 	"github.com/pterm/pterm"
 )
